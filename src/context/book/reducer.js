@@ -1,7 +1,36 @@
-// TODO: import actions and implement reducer for each action
-export default function reducer() {}
+import { ADD_BOOK, REMOVE_BOOK, SEARCH_BOOKS } from './actions';
 
-// This helper function stores the favoriteBook state in localStorage as a string
+export default function reducer(state, action) {
+  switch (action.type) {
+    case SEARCH_BOOKS: {
+      return {
+        ...state,
+        bookSearchResults: action.payload,
+      };
+    }
+    case ADD_BOOK: {
+      const updatedFavorites = [...state.favoriteBooks, action.payload];
+      saveToLocalStorage(updatedFavorites);
+      return {
+        ...state,
+        favoriteBooks: updatedFavorites,
+      };
+    }
+    case REMOVE_BOOK: {
+      const updatedFavorites = state.favoriteBooks.filter(
+        (book) => book.id !== action.payload
+      );
+      saveToLocalStorage(updatedFavorites);
+      return {
+        ...state,
+        favoriteBooks: updatedFavorites,
+      };
+    }
+    default:
+      return state;
+  }
+}
+
 function saveToLocalStorage(favBooks) {
-  localStorage.setItem('favoriteBooks', JSON.stringify(favBooks))
+  localStorage.setItem('favoriteBooks', JSON.stringify(favBooks));
 }
