@@ -18,12 +18,14 @@ export default function Search() {
     const res = await fetch(
       `https://www.googleapis.com/books/v1/volumes?langRestrict=en&q=${query}&maxResults=16`
     )
-    if (res.status !== 200) return
+    if (res.status !== 200) {
+      setFetching(false)
+      return
+    }
     const data = await res.json()
     dispatch({
       action: actions.SEARCH_BOOKS,
-      payload: data
-        .items
+      payload: (data.items ?? [])
         .map(({id, volumeInfo}) => ({
           ...volumeInfo,
           id,

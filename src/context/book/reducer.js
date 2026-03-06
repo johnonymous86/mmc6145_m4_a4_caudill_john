@@ -1,7 +1,7 @@
 import { ADD_BOOK, REMOVE_BOOK, SEARCH_BOOKS } from './actions';
 
 export default function reducer(state, action) {
-  switch (action.type) {
+  switch (action.action) {
     case SEARCH_BOOKS: {
       return {
         ...state,
@@ -30,6 +30,7 @@ export default function reducer(state, action) {
       return state;
   }
 }
+
 
 function saveToLocalStorage(favBooks) {
   localStorage.setItem('favoriteBooks', JSON.stringify(favBooks));

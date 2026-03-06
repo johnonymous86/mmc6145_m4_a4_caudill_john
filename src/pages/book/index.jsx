@@ -22,10 +22,10 @@ export default function Book() {
       <div className={styles.controls}>
         {
           isFavoriteBook
-          ? <button onClick={() => dispatch({ type: REMOVE_BOOK, payload: book.id })}>
+          ? <button onClick={() => dispatch({ action: REMOVE_BOOK, payload: book.id })}>
               Remove from Favorites
             </button>
-          : <button onClick={() => dispatch({ type: ADD_BOOK, payload: book })}>
+          : <button onClick={() => dispatch({ action: ADD_BOOK, payload: book })}>
               Add to Favorites
             </button>
         }
